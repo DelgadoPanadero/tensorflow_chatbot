@@ -1,4 +1,4 @@
-./doc/.*txt$
-./doc/.*pdf$
-./__pycache__/.*
-./data/.*
+./doc/*.txt
+./doc/*.pdf
+./__pycache__/*
+./data/*
