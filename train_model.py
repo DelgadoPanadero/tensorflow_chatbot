@@ -1,7 +1,10 @@
+import sys
+import os
+import glob
 from disintegrator import *
 from word2vec import *
 from seq2seq import *
-
+from progress_bar import *
 
 
 
@@ -9,10 +12,16 @@ from seq2seq import *
 if __name__ == "__main__":
 
 
-	print('Init training model')
 
-	with open('data/caperucita_roja', 'r') as file_obj: #encoding="ISO-8859-1"
-    		text = file_obj.read()
+	# INIT TRAINING MODEL
+	print('- INIT TRAINING MODEL \n')
+
+	text = ''
+
+	for filename in glob.glob(os.path.join('./data/', '*.txt')):
+
+		with open(filename, 'r') as file_obj:
+    			text = text + '. ' + file_obj.read()
     
 	with open('data/stop_words', 'r') as file_obj:
    		 stopwords = file_obj.readlines()
@@ -21,10 +30,10 @@ if __name__ == "__main__":
 
 
 
+	# CREATE A DICC AND PROCESSING DATA
+	print('- CREATE DICC AND PROCESSING DATA \n')
 
-	print('Created dicc and data')
-
-	vocab_size = 200
+	vocab_size = 2000
 	embedding_dim = 10
 
 
@@ -39,8 +48,8 @@ if __name__ == "__main__":
 
 
 
-
-	print('Created dicc and data')
+	# WORD EMBBEDING ALGORITHM
+	print('- WORD EMBBEDING ALGORITHM \n')
 
 	word_to_vec = word2vec(vocab_size, embedding_dim)
 	x_train,y_train = word_to_vec.training_data(data)
@@ -57,34 +66,58 @@ if __name__ == "__main__":
 
 
 
-	print('Train the model:')
 
-	# Initialize all the variables
-	session = tf.Session()
-	init_variables = tf.global_variables_initializer()
-	session.run(init_variables)
-	losses = []
+	#TRAIN THE MODEL
+	print('- TRAIN THE MODEL')
+	printProgressBar(0, len(conversations), prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 
-	for id, conv in enumerate(conversations):
+	with tf.Session() as session:
+
+		saver = tf.train.Saver()
+		init_variables = tf.global_variables_initializer()
+		session.run(init_variables)
+		losses = []
+
+
+		for i, conv in enumerate(conversations):
    
 
-    		# Convert text to vector
-    		_input_sentence = word_to_vec.encoder(conv[0])
-    		_output_sentence = word_to_vec.encoder(conv[1])
+	    		# Convert text to vector
+	    		_input_sentence = word_to_vec.encoder(conv[0])
+	    		_output_sentence = word_to_vec.encoder(conv[1])
 
 
-    		# Convert text to vector
-    		_input_sentence = np.transpose(np.array(_input_sentence))
-    		_output_sentence = np.transpose(np.array(_output_sentence))
+ 	   		# Convert text to vector
+	    		_input_sentence = np.transpose(np.array(_input_sentence))
+	    		_output_sentence = np.transpose(np.array(_output_sentence))
 
 
-   		 # Run the graph
-    		_, _loss = session.run([train_step, loss], feed_dict={input_sentence : _input_sentence, output_sentence: _output_sentence})
+	   		 # Run the graph
+	    		_,_pred_predicted_output, _loss = session.run([train_step,pred_predicted_output, loss], feed_dict={input_sentence : _input_sentence, output_sentence: _output_sentence})
     
 
-    		losses.append(_loss)
+    			losses.append(_loss)
 
-    		if (id % (len(conversations)//100) == 0):
+    			if (i % (len(conversations)//100) == 0):
+        			print('\n\n',conv[1])
+        			print(word_to_vec.decoder(_pred_predicted_output.shape),'\n')
+        			saver.save(session, "./model/seq2seq_iter", global_step = i)
+        			printProgressBar(i + 1, len(conversations), prefix = 'Progress:', suffix = 'Complete', length = 50)
 
-        		print('\t Processed: %d %%' %(id / (len(conversations)/100)))
+
+
+		# SAVE THE MODEL
+		print('\n- SAVE THE MODEL')
+		saver.save(session, "./model/seq2seq_model")
+
+
+		# GRAPH VISUALIZATION
+
+		'''
+		This is needed to plot the graph in the tensorboar
+		command: tensorboard --logdir="./model/seq2seq_graph_visualization"
+		'''
+
+		writer = tf.summary.FileWriter("./model/seq2seq_graph_visualization")
+		writer.add_graph(session.graph)

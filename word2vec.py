@@ -81,14 +81,12 @@ class word2vec(object):
         Then it transforms the index representation to one-hot-encoding representation.
         
         It works with training data structure ([[word, [word,word]],...]) and with predictive ([[word],...])
-        
         '''
         
-        with open('./models/dicc.pkl','rb') as file:
+        with open('./model/dicc.pkl','rb') as file:
             dicc = pickle.load(file)
             dicc_w2i = dicc['w2i']
-
-            
+  
             
         input_train = []
         output_train = []
@@ -108,19 +106,6 @@ class word2vec(object):
             #output_index = [dicc_w2i[word] for word in np.array(data_word[1]).reshape(-1)] #el output es más enrevesado porque puede ser una palabra o una lista de palabras
             output_train.append(self.to_one_hot(output_index))
 
-        
-        '''elif(len(data[0])==1): #if data is training data
-            
-            for data_word in data:
-            
-                #input_indexes = word2int[data_word[0]]
-                input_indexes = word2int[np.reshape(data_word,(1,-1))[0]] #el imput siempre es solo una palabra
-                input_train.append(self.to_one_hot(input_indexes, self.vocab_size))  
-              
-        
-        else: 
-            continue
-        '''
         
         input_train = np.asarray(input_train)
         output_train = np.asarray(output_train)  
@@ -163,14 +148,14 @@ class word2vec(object):
         
         
         
-            saver = tf.train.Saver()
-            saver.save(sess, "./models/word2vec_model")
+            #saver = tf.train.Saver()
+            #saver.save(sess, "./model/word2vec_model")
             
             W1 = sess.run(self.W1)
             b1 = sess.run(self.b1)
             
-            np.save('models/word2vec_W1.npy', W1)
-            np.save('models/word2vec_b1.npy', b1)
+            np.save('model/word2vec_W1.npy', W1)
+            np.save('model/word2vec_b1.npy', b1)
         
         
         return (W1, b1)
@@ -186,8 +171,8 @@ class word2vec(object):
         '''
         with tf.Session() as sess:
             
-            saver = tf.train.import_meta_graph('./models/word2vec_model.meta')
-            saver.restore(sess,tf.train.latest_checkpoint('./models/word2vec'))
+            saver = tf.train.import_meta_graph('./model/word2vec_model.meta')
+            saver.restore(sess,tf.train.latest_checkpoint('./model/word2vec'))
 
             graph = tf.get_default_graph()
             
@@ -199,10 +184,10 @@ class word2vec(object):
             vector = sess.run(vector, feed_dict={input_data: x_train})
         '''
         
-        W1 = np.load('models/word2vec_W1.npy')
-        b1 = np.load('models/word2vec_b1.npy')
+        W1 = np.load('model/word2vec_W1.npy')
+        b1 = np.load('model/word2vec_b1.npy')
         
-        with open('./models/dicc.pkl','rb') as file:
+        with open('./model/dicc.pkl','rb') as file:
             dicc = pickle.load(file)
         
         dicc_w2i = dicc['w2i']
@@ -224,10 +209,10 @@ class word2vec(object):
         It loads the graph, extract the tensors W1 y b1 and 
         '''
         
-        W1 = np.load('models/word2vec_W1.npy')
-        b1 = np.load('models/word2vec_b1.npy')
+        W1 = np.load('model/word2vec_W1.npy')
+        b1 = np.load('model/word2vec_b1.npy')
         
-        with open('./models/dicc.pkl','rb') as file:
+        with open('./model/dicc.pkl','rb') as file:
             dicc = pickle.load(file)
         
         dicc_i2w = dicc['i2w']
@@ -237,8 +222,8 @@ class word2vec(object):
         
         '''with tf.Session() as sess:
 
-            saver = tf.train.import_meta_graph('./models/word2vec_model.meta')
-            saver.restore(sess,tf.train.latest_checkpoint('./models_word2vec'))
+            saver = tf.train.import_meta_graph('./model/word2vec_model.meta')
+            saver.restore(sess,tf.train.latest_checkpoint('./model/model_word2vec'))
    
             graph = tf.get_default_graph()
             input_data = graph.get_tensor_by_name("input_data:0")
@@ -267,13 +252,79 @@ class word2vec(object):
 
 if __name__ == "__main__":
 
+	from disintegrator import *
+	from word2vec_topology import *
+	import glob
+	import sys
+	import os
+	import random
 
-	model = word2vec(vocab_size, embedding_dim)
-	x_train,y_train = model.training_data(data)
-	_ = model.train(x_train,y_train)
+	text = ''
+
+	for filename in glob.glob(os.path.join('./data/', '*.txt')):
+
+		with open(filename, 'r') as file_obj:
+    			text = text + '. ' + file_obj.read()
+    
+	with open('data/stop_words', 'r') as file_obj:
+   		 stopwords = file_obj.readlines()
 
 
-	vectors = model.encoder(['caperucita','lobo','abuela'])
-	palabras = model.decoder(vectors)
-	print(palabras)
+
+
+	print('Propiedades del texto: \n')
+	print('\tTexto con %d caracteres' %(len(text)))
+	print('\tTexto con %d palabras' %(len(text.split())))
+	print('\n')
+
+
+
+
+	vocab_size = 2000
+	embedding_dim = 10
+
+	prepare = data_preparation()
+	text = prepare.make_disintegration(text)
+	sent = prepare.get_sentences(text)
+	dicc = prepare.get_dictionary(text, stopwords, vocab_size)
+	data = prepare.get_word_list(sent, stopwords, window_size = 1)
+
+
+
+	print('Propiedades del corpus: \n')
+	print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
+
+
+
+
+	word_to_vec = word2vec(vocab_size, embedding_dim)
+	x_train,y_train = word_to_vec.training_data(data)
+	W1,b1 = word_to_vec.train(x_train,y_train)
+	vocab_vectors = W1+b1
+
+
+	print('Espacio embebido:\n')
+
+
+	print('\tRadio máximo del espacio: %d' %max_radius(vocab_vectors))
+
+
+	print('\tRadio máximo del espacio: %d' %meansquare_radius(vocab_vectors))
+
+
+	print('\tVarianza explicada dimensionalmente:')
+	variances = variance_distribution(vocab_vectors)
+	for i in range(embedding_dim): print('\t\t', variances[i])
+
+
+	#print('\tPalabras entorno a la posición comodín: %d' %wildcardpoint_density(vocab_vectors))
+
+
+	print('\tEjemplos:')
+	word_idx = random.sample(range(len(data)),10)
+	for idx in word_idx: print('\t\t', data[idx][0],': ', get_nearest_words(data[idx][0],vocab_vectors,word_to_vec))
+
+	#vectors = model.encoder(['caperucita','lobo','abuela'])
+	#palabras = model.decoder(vectors)
+	#print(palabras)
 

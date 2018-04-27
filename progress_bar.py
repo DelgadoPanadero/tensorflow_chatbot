@@ -27,7 +27,7 @@ if __name__ == '__main__':
     items = list(range(0, 57))
     l = len(items)
 
-    printProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+    printProgressBar(0, l, prefix = ' Progress:', suffix = 'Complete', length = 50)
 
     for i, item in enumerate(items):
         sleep(0.1)

@@ -25,3 +25,4 @@ I have developed this module instead of using an existing one because this model
 * Create an independent module for seq2seq to performe the predictive model
 * Think about the idea of separating the seq2seq predictive model into encoder-decoder model
 * Create a webapp to deploy the model in a chat.
+* Process either in GPU or optimize GPU parallelize

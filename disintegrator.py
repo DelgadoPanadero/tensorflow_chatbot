@@ -43,8 +43,7 @@ class data_preparation(object):
     def get_sentences(self, text):
         
         '''
-        text: plain text with only lower letters and stops.
-        
+        text: plain text with only lower letters and stops.        
         setences: list of text chunks split by stops.
         '''
         
@@ -65,13 +64,11 @@ class data_preparation(object):
         This is made for getting an index-representation for the words in the text.
         It only creates an index for the "vocab_size" most popular words in the text.
         
-        text: plain text with only lower letters and stops.
-        
+        text: plain text with only lower letters and stops.   
         dicc_w2i: mapping word
         '''  
         
         words = []
-        
         
         for word in text.split(' '): 
             
@@ -92,7 +89,7 @@ class data_preparation(object):
         dicc = {'w2i' : dicc_w2i, 'i2w' : dicc_i2w}
         
 
-        with open("models/dicc.pkl","wb") as file:
+        with open("model/dicc.pkl","wb") as file:
             pickle.dump(dicc,file)
             
             
@@ -162,14 +159,19 @@ class data_preparation(object):
 
 if __name__ == "__main__":
 
-	with open('data/caperucita_roja', 'r') as file_obj: #encoding="ISO-8859-1"
-    		text = file_obj.read()
+
+	text = ''
+
+	for filename in glob.glob(os.path.join('./data/', '*.txt')):
+
+		with open(filename, 'r') as file_obj:
+    			text = text + '. ' + file_obj.read()
     
 	with open('data/stop_words', 'r') as file_obj:
    		 stopwords = file_obj.readlines()
 
 
-	vocab_size = 200
+	vocab_size = 2000
 	embedding_dim = 10
 
 
