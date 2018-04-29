@@ -91,6 +91,7 @@ def wildcardpoint_density(words, radius=meansquare_radius):
 
 
 
+
 def get_nearest_words(word_string, words, word_to_vec, n = 5, radius = max_radius):
 
     '''
@@ -98,14 +99,13 @@ def get_nearest_words(word_string, words, word_to_vec, n = 5, radius = max_radiu
     '''
 
 
-    word = word_to_vec.encoder(word_string)
-    distances = np.apply_along_axis(euclidean_dist, 1, words, np.array(word))
+    word = word_to_vec.encoder([word_string])
+    distances = np.apply_along_axis(euclidean_dist, 1, words,word)
 
     near_radius = radius(words)/np.sqrt(words.shape[-1])
-    near_words_idx = np.where(distances < near_radius)
-    near_words = np.take(words, near_words_idx)
-    near_string_words = word_to_vec.decoder(near_words)
+    near_words = words[np.where(distances < near_radius),:]
+
+    near_string_words = word_to_vec.decoder(near_words[0])
     near_string_words = near_string_words[:n]
 
-    return word
-
+    return near_string_words

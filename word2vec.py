@@ -263,7 +263,7 @@ if __name__ == "__main__":
 
 	for filename in glob.glob(os.path.join('./data/', '*.txt')):
 
-		with open(filename, 'r') as file_obj:
+		with open(filename, 'r', encoding='latin-1') as file_obj:
     			text = text + '. ' + file_obj.read()
     
 	with open('data/stop_words', 'r') as file_obj:
@@ -321,7 +321,7 @@ if __name__ == "__main__":
 
 
 	print('\tEjemplos:')
-	word_idx = random.sample(range(len(data)),10)
+	word_idx = random.sample(range(len(data)),50)
 	for idx in word_idx: print('\t\t', data[idx][0],': ', get_nearest_words(data[idx][0],vocab_vectors,word_to_vec))
 
 	#vectors = model.encoder(['caperucita','lobo','abuela'])
