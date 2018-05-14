@@ -5,19 +5,16 @@ import tensorflow as tf
 
 
 class word2vec(object):
-    
 
     '''
     Object for implementing word2vec algorithm in a dataset with the requiered structure.
-    
+
     Requires:
-    
         - The dataset
         - Dictionary of words and indexes
         - Parameters
-        
+
     Saves in local:
-    
         - Tensorflow graph
         - Tensors W1 and b1 as a np.array for the encoder and decoder.
     '''
@@ -148,8 +145,8 @@ class word2vec(object):
         
         
         
-            #saver = tf.train.Saver()
-            #saver.save(sess, "./model/word2vec_model")
+            # saver = tf.train.Saver()
+            # saver.save(sess, "./model/word2vec_model")
             
             W1 = sess.run(self.W1)
             b1 = sess.run(self.b1)
@@ -206,7 +203,7 @@ class word2vec(object):
         '''
         Returns the nearest word in the word-representation for the given vectors.
         
-        It loads the graph, extract the tensors W1 y b1 and 
+        It loads the graph, extract the tensors W1 and b1
         '''
         
         W1 = np.load('model/word2vec_W1.npy')
@@ -252,79 +249,90 @@ class word2vec(object):
 
 if __name__ == "__main__":
 
-	from disintegrator import *
-	from word2vec_topology import *
-	import glob
-	import sys
-	import os
-	import random
+    from disintegrator import *
+    from word2vec_topology import *
+    import glob
+    import sys
+    import os
+    import random
 
-	text = ''
+    text = ''
 
-	for filename in glob.glob(os.path.join('./data/', '*.txt')):
+    # Si no pasamos argumentos por línea de comandos, leemos todos los archivos de ./data/
+    if sys.argv[-1] == os.path.basename(__file__):
 
-		with open(filename, 'r', encoding='latin-1') as file_obj:
-    			text = text + '. ' + file_obj.read()
-    
-	with open('data/stop_words', 'r') as file_obj:
-   		 stopwords = file_obj.readlines()
+        for filename in glob.glob(os.path.join('./data/', '*.txt')):
+            with open(filename, 'r', encoding='latin-1') as file_obj:
+                text = text + '. ' + file_obj.read()
 
-
-
-
-	print('Propiedades del texto: \n')
-	print('\tTexto con %d caracteres' %(len(text)))
-	print('\tTexto con %d palabras' %(len(text.split())))
-	print('\n')
+    # Si pasamos nombres de archivos de ./data/ lee el nombre de los archivos que le pasemos
+    else:
+        for filename in sys.argv[1:]:
+            filename = './data/' + filename
+            with open(filename, 'r', encoding='latin-1') as file_obj:
+                text = text + '. ' + file_obj.read()
 
 
-
-
-	vocab_size = 2000
-	embedding_dim = 10
-
-	prepare = data_preparation()
-	text = prepare.make_disintegration(text)
-	sent = prepare.get_sentences(text)
-	dicc = prepare.get_dictionary(text, stopwords, vocab_size)
-	data = prepare.get_word_list(sent, stopwords, window_size = 1)
-
-
-
-	print('Propiedades del corpus: \n')
-	print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
+    # Stopwords
+    with open('data/stop_words', 'r') as file_obj:
+        stopwords = file_obj.readlines()
 
 
 
 
-	word_to_vec = word2vec(vocab_size, embedding_dim)
-	x_train,y_train = word_to_vec.training_data(data)
-	W1,b1 = word_to_vec.train(x_train,y_train)
-	vocab_vectors = W1+b1
+    print('Propiedades del texto: \n')
+    print('\tTexto con %d caracteres' %(len(text)))
+    print('\tTexto con %d palabras' %(len(text.split())))
+    print('\n')
 
 
-	print('Espacio embebido:\n')
 
 
-	print('\tRadio máximo del espacio: %d' %max_radius(vocab_vectors))
+    vocab_size = 2000
+    embedding_dim = 10
+
+    prepare = data_preparation()
+    text = prepare.make_disintegration(text)
+    sent = prepare.get_sentences(text)
+    dicc = prepare.get_dictionary(text, stopwords, vocab_size)
+    data = prepare.get_word_list(sent, stopwords, window_size = 1)
 
 
-	print('\tRadio máximo del espacio: %d' %meansquare_radius(vocab_vectors))
+
+    print('Propiedades del corpus: \n')
+    print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
 
 
-	print('\tVarianza explicada dimensionalmente:')
-	variances = variance_distribution(vocab_vectors)
-	for i in range(embedding_dim): print('\t\t', variances[i])
 
 
-	#print('\tPalabras entorno a la posición comodín: %d' %wildcardpoint_density(vocab_vectors))
+    word_to_vec = word2vec(vocab_size, embedding_dim)
+    x_train,y_train = word_to_vec.training_data(data)
+    W1,b1 = word_to_vec.train(x_train,y_train)
+    vocab_vectors = W1+b1
 
 
-	print('\tEjemplos:')
-	word_idx = random.sample(range(len(data)),50)
-	for idx in word_idx: print('\t\t', data[idx][0],': ', get_nearest_words(data[idx][0],vocab_vectors,word_to_vec))
+    print('Espacio embebido:\n')
 
-	#vectors = model.encoder(['caperucita','lobo','abuela'])
-	#palabras = model.decoder(vectors)
-	#print(palabras)
+
+    print('\tRadio máximo del espacio: %d' %max_radius(vocab_vectors))
+
+
+    print('\tRadio medio del espacio: %d' %meansquare_radius(vocab_vectors))
+
+
+    print('\tVarianza explicada dimensionalmente:')
+    variances = variance_distribution(vocab_vectors)
+    for i in range(embedding_dim): print('\t\t', variances[i])
+
+
+    #print('\tPalabras entorno a la posición comodín: %d' %wildcardpoint_density(vocab_vectors))
+
+
+    print('\tEjemplos:')
+    word_idx = random.sample(range(len(data)),50)
+    for idx in word_idx: print('\t\t', data[idx][0],': ', get_nearest_words(data[idx][0],vocab_vectors,word_to_vec))
+
+    # vectors = model.encoder(['caperucita','lobo','abuela'])
+    # palabras = model.decoder(vectors)
+    # print(palabras)
 
