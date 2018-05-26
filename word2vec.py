@@ -54,8 +54,10 @@ class word2vec(object):
         
         
         # OPTIMIZATION
-        self.cross_entropy_loss = tf.reduce_mean(-tf.reduce_sum(self.output_data * tf.log(self.prediction), reduction_indices=[1]))
-        self.train_step = tf.train.GradientDescentOptimizer(self.optimizer_step).minimize(self.cross_entropy_loss)   
+        #self.cross_entropy_loss = tf.reduce_mean(-tf.reduce_sum(self.output_data * tf.log(self.prediction), reduction_indices=[1]))
+        self.loss = tf.reduce_mean(tf.squared_difference(self.output_data, self.prediction))
+        self.train_step = tf.train.GradientDescentOptimizer(self.optimizer_step).minimize(self.loss)   
+ 
     
         
         
