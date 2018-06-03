@@ -172,7 +172,7 @@ pred_decoded = gru_layer_decoder.predict_sequence(output_sentence_ended, h_0=tho
 
 # Output_data
 train_predicted_output = tf.convert_to_tensor(train_decoded, dtype=tf.float64, name='train_output')
-pred_predicted_output = pred_output_response
+pred_predicted_output = tf.convert_to_tensor(pred_decoded, dtype=tf.float64, name='pred_output')
 
 
 # Loss

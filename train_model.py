@@ -3,7 +3,7 @@ import os
 import glob
 from disintegrator import *
 from word2vec import *
-from seq2seqB import *
+from seq2seq import *
 from progress_bar import *
 
 
@@ -19,10 +19,10 @@ if __name__ == "__main__":
 
 	for filename in glob.glob(os.path.join('./data/', '*.txt')):
 
-		with open(filename, 'r') as file_obj:
+		with open(filename, 'r', encoding = 'latin1') as file_obj:
 			text = text + '. ' + file_obj.read()
     
-	with open('data/stop_words', 'r') as file_obj:
+	with open('data/stop_words', 'r', encoding = 'latin1') as file_obj:
 		stopwords = file_obj.readlines()
 
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 	print('- WORD EMBBEDING ALGORITHM \n')
 
 	word_to_vec = word2vec(vocab_size, embedding_dim)
-	x_train,y_train = word_to_vec.training_data(data)
+	x_train, y_train = word_to_vec.training_data(data)
 	_ = word_to_vec.train(x_train,y_train)
 
 
@@ -92,13 +92,15 @@ if __name__ == "__main__":
 
 
 			# Run the graph
-			_,_pred_predicted_output, _loss = session.run([train_step,pred_predicted_output, loss], feed_dict={input_sentence : _input_sentence, output_sentence: _output_sentence})
+			_,_pred_predicted_output, _loss = session.run([train_step,pred_predicted_output, loss],
+				feed_dict={input_sentence : _input_sentence, output_sentence: _output_sentence})
 
 			losses.append(_loss)
 
 			if (i % (len(conversations)//100) == 0):
 				print('\n\n','Respuesta esperada: ', conv[1])
-				print('Respuesta predicha: ',word_to_vec.decoder(_pred_predicted_output.shape),'\n')
+				print('Respuesta predicha: ',word_to_vec.decoder(_pred_predicted_output[:,0:-1].tolist()),'\n')
+				print('Loss: ', _loss)
 				saver.save(session, "./model/seq2seq_iter", global_step = i)
 				printProgressBar(i + 1, len(conversations), prefix = 'Progress:', suffix = 'Complete', length = 50)
 

@@ -6,13 +6,14 @@ from word2vec import *
 from seq2seq import *
 import pprint
 
-_input_sentence = sys.argv[-1]
 
 
 if __name__ == "__main__":
 
 
+
 	# INPUT DATA
+	_input_sentence = sys.argv[-1]
 	prepare = data_preparation()
 	_input_sentence = prepare.make_disintegration(_input_sentence)
 
@@ -34,11 +35,11 @@ if __name__ == "__main__":
 		saver.restore(session,tf.train.latest_checkpoint('./model/'))
 		graph = tf.get_default_graph()
 		input_data = graph.get_tensor_by_name("input_data:0")
-#		predict_output = graph.get_tensor_by_name('predict_output:0')
-		predict_output = graph.get_tensor_by_name('whileloop_predict_sentence:0')
+		predict_output = graph.get_tensor_by_name('predict_output:0')
+#		predict_output = graph.get_tensor_by_name('whileloop_predict_sentence:0')
 		_output_sentence = session.run(predict_output, feed_dict = {input_data : _input_sentence})
 
 
 	# DECODE THE ANSWER
-	_output_sentence = word_to_vec.decoder(_output_sentence)
-	print(' '.join(_input_sentence))
+	_output_sentence = word_to_vec.decoder(_pred_predicted_output[:,0:-1].tolist())
+	print(' '.join(_output_sentence))
