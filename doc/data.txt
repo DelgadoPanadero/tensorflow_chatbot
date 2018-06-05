@@ -1,7 +1,0 @@
-
-###################
-Wikicorpus, v. 1.0: Catalan, Spanish and English portions of the Wikipedia.
-###################
-
-./raw.es/
-http://www.cs.upc.edu/~nlp/wikicorpus/

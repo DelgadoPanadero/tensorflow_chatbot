@@ -1,132 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1c60058-37c4-472d-944c-3ebf0b12b264" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/model/Word2Vec_W1.npy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-312.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-312.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-312.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-468.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-468.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-624.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-624.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-780.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-780.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-936.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/seq2seq_iter-936.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parameters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_model2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/chatbot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/chatbot.iml" afterDir="false" />
+    <list default="true" id="535e665d-3f55-4f36-ab76-011ff950ca46" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/tensorflow_chatbot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.Rhistory" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/chatbot.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Word2Vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/Word2Vec.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/disintegrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/disintegrator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/model/checkpoint" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/dicc.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/model/dicc.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1524664101.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1524665379.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1524667859.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1524668503.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1525354577.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1526223637.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1526224080.7X5NH12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1527961333.DESKTOP-Q9OTGQG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1528046082.DESKTOP-Q9OTGQG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_graph_visualization/events.out.tfevents.1528061839.DESKTOP-Q9OTGQG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1080.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1080.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1080.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11016.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11016.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11016.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11448.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11448.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11448.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11664.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11664.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11664.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11880.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11880.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-11880.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12416.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12416.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12416.meta" beforeDir="false" afterPath="$PROJECT_DIR$/model/seq2seq_iter-468.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12544.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12544.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12544.meta" beforeDir="false" afterPath="$PROJECT_DIR$/model/seq2seq_iter-624.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12672.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12672.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12672.meta" beforeDir="false" afterPath="$PROJECT_DIR$/model/seq2seq_iter-936.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12800.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12800.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-12800.meta" beforeDir="false" afterPath="$PROJECT_DIR$/model/seq2seq_iter-780.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1296.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1296.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1296.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1512.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1512.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1512.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15132.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15132.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15132.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15288.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15288.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15288.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15444.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15444.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15444.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15600.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15600.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-15600.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1728.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1728.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1728.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1944.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1944.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-1944.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-20952.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-20952.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-20952.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21168.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21168.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21168.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21384.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21384.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21384.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21600.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21600.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-21600.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-468.index.tempstate553234722643934320" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5400.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5400.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5400.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5832.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5832.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-5832.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6048.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6048.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6048.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6264.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6264.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6264.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6480.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6480.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6480.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6696.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6696.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-6696.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-7128.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-7128.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-7128.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_model.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_model.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/seq2seq_model.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/word2vec_W1.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/word2vec_b1.npy" beforeDir="false" afterPath="$PROJECT_DIR$/model/Word2Vec_b1.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predict_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/disintegrator-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/seq2seq-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/word2vec-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/1409.3215.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/1506.05869v1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/disintegrator.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/seq2seq.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Word2Vec_W1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Word2Vec_b1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/checkpoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/dicc.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-312.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-312.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-312.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-468.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-468.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-468.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-624.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-624.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-624.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-780.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-780.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-780.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-936.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-936.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/seq2seq_iter-936.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/parameters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/seq2seq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word2vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/Word2Vec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word2vec_topology.py" beforeDir="false" afterPath="$PROJECT_DIR$/Word2Vec_topology.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_model2.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -137,40 +51,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="disintegrator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/disintegrator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1649">
+              <caret line="121" column="52" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
+              <folding>
+                <element signature="e#16#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="seq2seq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seq2seq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2100">
-              <caret line="1" selection-start-line="1" selection-end-line="3" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Word2Vec.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Word2Vec.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parameters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parameters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="disintegrator.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/disintegrator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+            <state relative-caret-position="1194">
+              <caret line="186" column="52" lean-forward="true" selection-start-line="186" selection-start-column="52" selection-end-line="186" selection-end-column="52" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,8 +78,8 @@
       <file leaf-file-name="train_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" selection-start-line="25" selection-end-line="26" />
+            <state relative-caret-position="524">
+              <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -188,14 +87,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predict_model.py">
+      <file leaf-file-name="Word2Vec.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Word2Vec.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="208">
+              <caret line="245" column="25" selection-start-line="245" selection-start-column="25" selection-end-line="245" selection-end-column="25" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parameters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -204,21 +112,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>resha</find>
-      <find>predict_model</find>
-      <find>pred_output_response</find>
-      <find>while</find>
-      <find>embe</find>
-      <find>embbeding</find>
-      <find>Word2Vec</find>
-      <find>word2vec</find>
-      <find>data_pre</find>
-      <find>input_d</find>
-      <find>word_to_vec</find>
-      <find>np</find>
-      <find>np.</find>
       <find>window</find>
-      <find>stopwords</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -227,23 +121,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/seq2seq (copy).py" />
-        <option value="$PROJECT_DIR$/seq2seqB.py" />
-        <option value="$PROJECT_DIR$/word2vec.py" />
-        <option value="$PROJECT_DIR$/predict_model.py" />
-        <option value="$PROJECT_DIR$/seq2seq.py" />
         <option value="$PROJECT_DIR$/parameters.py" />
-        <option value="$PROJECT_DIR$/train_model.py" />
-        <option value="$PROJECT_DIR$/Word2Vec.py" />
+        <option value="$PROJECT_DIR$/seq2seq.py" />
         <option value="$PROJECT_DIR$/disintegrator.py" />
+        <option value="$PROJECT_DIR$/Word2Vec.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="1308" />
-    <option name="y" value="24" />
-    <option name="width" value="1248" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="285" />
+    <option name="y" value="-5" />
+    <option name="width" value="1250" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -258,23 +147,11 @@
               <item name="tensorflow_chatbot" type="b2602c69:ProjectViewProjectNode" />
               <item name="tensorflow_chatbot" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="tensorflow_chatbot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="tensorflow_chatbot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -288,58 +165,33 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="train_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="chatbot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.train_model" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c1c60058-37c4-472d-944c-3ebf0b12b264" name="Default" comment="" />
-      <created>1525339674183</created>
+      <changelist id="535e665d-3f55-4f36-ab76-011ff950ca46" name="Default" comment="" />
+      <created>1528232071504</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1525339674183</updated>
+      <updated>1528232071504</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1308" y="24" width="1248" height="1056" extended-state="4" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27183673" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32991803" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32991803" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32991803" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.34450263" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -352,396 +204,96 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="2" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/disintegrator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="986">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5236">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="101" column="87" selection-start-line="101" selection-start-column="87" selection-end-line="101" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#16#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="66" selection-start-line="173" selection-start-column="66" selection-end-line="173" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/disintegrator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5236">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="101" column="87" selection-start-line="101" selection-start-column="87" selection-end-line="101" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="59" selection-start-line="173" selection-start-column="59" selection-end-line="173" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5236">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="59" selection-start-line="173" selection-start-column="59" selection-end-line="173" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5270">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="59" selection-start-line="173" selection-start-column="59" selection-end-line="173" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5236">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="173" column="59" selection-start-line="173" selection-start-column="59" selection-end-line="173" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5236">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2580">
-          <caret line="173" column="59" selection-start-line="173" selection-start-column="59" selection-end-line="173" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq (copy).py" />
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="121" column="34" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="310" column="25" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2610">
-          <caret line="175" selection-start-line="175" selection-end-line="176" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="310" column="25" lean-forward="true" selection-start-line="310" selection-start-column="25" selection-end-line="310" selection-end-column="25" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1305">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2625">
-          <caret line="175" selection-start-line="175" selection-end-line="176" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4515">
-          <caret line="301" lean-forward="true" selection-start-line="301" selection-end-line="301" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2625">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="176" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4980">
-          <caret line="332" column="6" selection-start-line="332" selection-start-column="6" selection-end-line="332" selection-end-column="6" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3525">
-          <caret line="235" column="12" lean-forward="true" selection-start-line="235" selection-start-column="12" selection-end-line="235" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="118" column="22" selection-start-line="118" selection-start-column="17" selection-end-line="118" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="100" column="21" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
-          <caret line="109" column="24" lean-forward="true" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="162" column="3" lean-forward="true" selection-start-line="163" selection-end-line="163" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="116" column="11" lean-forward="true" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seqb.py" />
-    <entry file="file://$PROJECT_DIR$/seq2seq (copy).py" />
-    <entry file="file://$PROJECT_DIR$/seq2seqb.py" />
-    <entry file="file://$PROJECT_DIR$/word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="36" />
-          <folding>
-            <element signature="e#2#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seq2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2100">
-          <caret line="1" selection-start-line="1" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Word2Vec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        <state relative-caret-position="153">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/disintegrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+          <folding>
+            <element signature="e#16#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seq2seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Word2Vec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/disintegrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+          <folding>
+            <element signature="e#16#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seq2seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1194">
+          <caret line="186" column="52" lean-forward="true" selection-start-line="186" selection-start-column="52" selection-end-line="186" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/train_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" selection-start-line="25" selection-end-line="26" />
+        <state relative-caret-position="524">
+          <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
@@ -750,10 +302,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/disintegrator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+        <state relative-caret-position="1649">
+          <caret line="121" column="52" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#16#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Word2Vec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="245" column="25" selection-start-line="245" selection-start-column="25" selection-end-line="245" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

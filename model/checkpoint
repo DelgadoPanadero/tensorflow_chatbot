@@ -1,6 +1,0 @@
-model_checkpoint_path: "seq2seq_iter-936"
-all_model_checkpoint_paths: "seq2seq_iter-312"
-all_model_checkpoint_paths: "seq2seq_iter-468"
-all_model_checkpoint_paths: "seq2seq_iter-624"
-all_model_checkpoint_paths: "seq2seq_iter-780"
-all_model_checkpoint_paths: "seq2seq_iter-936"

@@ -8,7 +8,7 @@ init_parameters()
 
 class Word2Vec(object):
 
-    '''
+    """
     Object for implementing word2vec algorithm in a dataset with the requiered structure.
 
     Requires:
@@ -19,107 +19,107 @@ class Word2Vec(object):
     Saves in local:
         - Tensorflow graph
         - Tensors W1 and b1 as a np.array for the encoder and decoder.
-    '''
+    """
 
-    def __init__(self,vocab_size,embedding_dim):
+    def __init__(self, vocab_size, embedding_dim, optimizer_step):
         
-        '''
-        Feed forward neuralnet architecture with two hidden layers.
-        
-        input: word vector in one-hot-encoding representation
-        label: window size words
-        
-        The vector representation of the word is the tensor "encoder"
-        '''
-        
+        """Feed forward neuralnetwork's parameters. Architecture with two hidden layers.
+        The vector representation of the word is the tensor 'encoder'.
+
+        The input are word vectors in one-hot-encoding representation.
+        The tarjet are the window size words arround the input word.
+        """
+
         # DIMENSIONS
         self.vocab_size = vocab_size
         self.embedding_dim = embedding_dim
-        self.optimizer_step = 0.01
-        
-    
+        self.optimizer_step = optimizer_step
+
         # NEURALNET
-        self.input_data = tf.placeholder(tf.float32, shape=(None, vocab_size), name = 'input_data')
-        self.output_data = tf.placeholder(tf.float32, shape=(None, vocab_size), name = 'output_data')
+        self.input_data = tf.placeholder(tf.float32, shape=(None, vocab_size), name='input_data')
+        self.output_data = tf.placeholder(tf.float32, shape=(None, vocab_size), name='output_data')
 
-        
-        self.W1 = tf.Variable(tf.random_normal([vocab_size, embedding_dim]), name = 'W1')
+        self.W1 = tf.Variable(tf.random_normal([vocab_size, embedding_dim]), name='W1')
         self.b1 = tf.Variable(tf.random_normal([embedding_dim]), name = 'b1')
-        self.vector = tf.add(tf.matmul(self.input_data,self.W1), self.b1, name = 'encoder')
-        
-        
-        self.W2 = tf.Variable(tf.random_normal([embedding_dim, vocab_size]), name = 'W2')
-        self.b2 = tf.Variable(tf.random_normal([vocab_size]), name = 'b2')
-        self.prediction = tf.nn.softmax(tf.add( tf.matmul(self.vector, self.W2), self.b2), name = 'prediction')
+        self.vector = tf.add(tf.matmul(self.input_data,self.W1), self.b1, name='encoder')
 
-        
-        
+        self.W2 = tf.Variable(tf.random_normal([embedding_dim, vocab_size]), name='W2')
+        self.b2 = tf.Variable(tf.random_normal([vocab_size]), name='b2')
+        self.prediction = tf.nn.softmax(tf.add( tf.matmul(self.vector, self.W2), self.b2), name='prediction')
+
         # OPTIMIZATION
-        #self.cross_entropy_loss = tf.reduce_mean(-tf.reduce_sum(self.output_data * tf.log(self.prediction), reduction_indices=[1]))
         self.loss = tf.reduce_mean(tf.squared_difference(self.output_data, self.prediction))
         self.train_step = tf.train.GradientDescentOptimizer(self.optimizer_step).minimize(self.loss)
         
     def to_one_hot(self, data_point_index):
-        
+        """ Given a number (index) returns the one-hot-representation vector.
+
+        :param data_point_index: number
+        :return: one_hot_vector
+        """
         temp = np.zeros(self.vocab_size)
         temp[data_point_index] = 1
         return temp
     
-    def training_data(self, data):
+    def training_data(self, _data):
         
-        '''
-        First it transforms the word data to the index representation.
-        Then it transforms the index representation to one-hot-encoding representation.
-        
+        """First it transforms the word data to the index representation.Then it transforms the index representation to
+        one-hot-encoding representation.
+
         It works with training data structure ([[word, [word,word]],...]) and with predictive ([[word],...])
-        '''
+
+        :param _data:
+        :return:
+        """
         
         with open('./model/dicc.pkl','rb') as file:
-            dicc = pickle.load(file)
-            dicc_w2i = dicc['w2i']
-  
+            _dicc = pickle.load(file)
+            dicc_w2i = _dicc['w2i']
             
         input_train = []
         output_train = []
-        
-        
-        #if(len(data[0])==2): #if data is predictive data
-        for data_word in data:
-            
-            #input_indexes = word2int[data_word[0]]            
-            input_index = dicc_w2i[data_word[0]] if  data_word[0] in dicc_w2i.keys() else 0 #el imput siempre es solo una palabra
+
+        for data_word in _data:
+
+            input_index = dicc_w2i[data_word[0]] if  data_word[0] in dicc_w2i.keys() else 0
+            #el imput siempre es solo una palabra
             input_train.append(self.to_one_hot(input_index))
             
             output_index = []
-            for word in np.array(data_word[1]).reshape(-1):#el output es más enrevesado porque puede ser una palabra o una lista de palabras
+            for word in np.array(data_word[1]).reshape(-1):
+                #el output es más enrevesado porque puede ser una palabra o una lista de palabras
                 output_index.append(dicc_w2i[word] if word in dicc_w2i.keys() else 0)
                 
-            #output_index = [dicc_w2i[word] for word in np.array(data_word[1]).reshape(-1)] #el output es más enrevesado porque puede ser una palabra o una lista de palabras
+            #output_index = [dicc_w2i[word] for word in np.array(data_word[1]).reshape(-1)]
+            # el output es más enrevesado porque puede ser una palabra o una lista de palabras
             output_train.append(self.to_one_hot(output_index))
 
-        
         input_train = np.asarray(input_train)
         output_train = np.asarray(output_train)  
 
         return input_train, output_train
 
-    def train(self, x_train, y_train, batch_size=256):
+    def train(self, _x_train, _y_train, batch_size=256):
         
-        '''
-        Train the tensorflow graph.
-        '''
+        """Train the tensorflow graph.
+
+        :param _x_train:
+        :param _y_train:
+        :param batch_size:
+        :return:
+        """
         
-        n_data = len(x_train)
+        n_data = len(_x_train)
         n_batch = n_data//batch_size
 
         with tf.Session() as sess:
             
             sess.run(tf.global_variables_initializer())
             
-            for batch_index in range(n_batch):
+            for _ in range(n_batch):
                 
-                x = x_train[(n_batch*batch_size):((n_batch+1)*batch_size)]
-                y = y_train[(n_batch*batch_size):((n_batch+1)*batch_size)]
+                x = _x_train[(n_batch*batch_size):((n_batch+1)*batch_size)]
+                y = _y_train[(n_batch*batch_size):((n_batch+1)*batch_size)]
 
                 sess.run([self.train_step,self.vector], feed_dict={self.input_data: x, self.output_data: y})
                 
@@ -128,20 +128,21 @@ class Word2Vec(object):
             # saver = tf.train.Saver()
             # saver.save(sess, "./model/Word2Vec_model")
             
-            W1 = sess.run(self.W1)
-            b1 = sess.run(self.b1)
+            _W1 = sess.run(self.W1)
+            _b1 = sess.run(self.b1)
             
-            np.save('model/Word2Vec_W1.npy', W1)
-            np.save('model/Word2Vec_b1.npy', b1)
+            np.save('model/Word2Vec_W1.npy', _W1)
+            np.save('model/Word2Vec_b1.npy', _b1)
         
-        return W1, b1
+        return _W1, _b1
         
     def encoder(self, words):
-        
-        '''
-        Load the save graph and execute for the words in one-hot-representation
-        '''
-        
+        """Load the save graph and execute for the words in one-hot-representation.
+
+        :param words: list of words to encode.
+        :return: list of vector-lists.
+        """
+
         '''
         with tf.Session() as sess:
             
@@ -158,38 +159,40 @@ class Word2Vec(object):
             vector = sess.run(vector, feed_dict={input_data: x_train})
         '''
         
-        W1 = np.load('model/Word2Vec_W1.npy')
-        b1 = np.load('model/Word2Vec_b1.npy')
+        _W1 = np.load('model/Word2Vec_W1.npy')
+        _b1 = np.load('model/Word2Vec_b1.npy')
         
         with open('./model/dicc.pkl', 'rb') as file:
-            dicc = pickle.load(file)
+            _dicc = pickle.load(file)
         
-        dicc_w2i = dicc['w2i']
+        dicc_w2i = _dicc['w2i']
         
         indexes = [dicc_w2i[word] if word in dicc_w2i else 0 for word in words]
         input_data = [self.to_one_hot(index) for index in indexes]
         input_data = np.reshape(input_data,(-1, self.vocab_size))
-        vectors = np.dot(input_data,W1)+b1
+        vectors = np.dot(input_data,_W1)+_b1
         
         return vectors.tolist()     
 
     def decoder(self, vectors):
         
-        '''
-        Returns the nearest word in the word-representation for the given vectors.
+        """Returns the nearest word in the word-representation for the given vectors. It loads the graph, extract the
+        tensors W1 and b1.
+
+        :param vectors: list of vector-lists
+        :return: list of words
+        """
         
-        It loads the graph, extract the tensors W1 and b1
-        '''
-        
-        W1 = np.load('model/Word2Vec_W1.npy')
-        b1 = np.load('model/Word2Vec_b1.npy')
+        _W1 = np.load('model/Word2Vec_W1.npy')
+        _b1 = np.load('model/Word2Vec_b1.npy')
         
         with open('./model/dicc.pkl', 'rb') as file:
-            dicc = pickle.load(file)
+            _dicc = pickle.load(file)
         
-        dicc_i2w = dicc['i2w']
+        dicc_i2w = _dicc['i2w']
     
-        def euclidean_dist(vector1, vector2): return np.sqrt(np.sum((vector1-vector2)**2))
+        def euclidean_dist(vector1, vector2):
+            return np.sqrt(np.sum((vector1-vector2)**2))
         
         '''with tf.Session() as sess:
 
@@ -202,16 +205,14 @@ class Word2Vec(object):
             vocab_vector = graph.get_tensor_by_name("vector:0")        
         
         '''
-
-        vocab_vectors = W1+b1
+        _vocab_vectors = _W1+_b1
 
         words = []
         for vector in vectors:
             
-            distances = np.apply_along_axis(euclidean_dist, 1, vocab_vectors, vector)
+            distances = np.apply_along_axis(euclidean_dist, 1, _vocab_vectors, vector)
             nearest_index = np.argmin(distances)
-            nearest_word = dicc_i2w[nearest_index] if nearest_index!=0 else ''
-            
+            nearest_word = dicc_i2w[nearest_index] if nearest_index != 0 else ''
             words.append(nearest_word)
             
         return words
@@ -231,14 +232,14 @@ if __name__ == "__main__":
     if sys.argv[-1] == os.path.basename(__file__):
 
         for filename in glob.glob(os.path.join('./data/', '*.txt')):
-            with open(filename, 'r', encoding='latin-1') as file_obj:
+            with open(filename, 'r', encoding=encoding) as file_obj:
                 text = text + '. ' + file_obj.read()
 
     # Si pasamos nombres de archivos de ./data/ lee el nombre de los archivos que le pasemos
     else:
         for filename in sys.argv[1:]:
             filename = './data/' + filename
-            with open(filename, 'r', encoding='latin-1') as file_obj:
+            with open(filename, 'r', encoding=encoding) as file_obj:
                 text = text + '. ' + file_obj.read()
 
     # Stopwords
@@ -254,13 +255,13 @@ if __name__ == "__main__":
     text = prepare.make_disintegration
     sent = prepare.get_sentences(text)
     dicc = prepare.get_dictionary(text, stopwords, vocab_size)
-    data = prepare.get_word_list(sent, stopwords, window_size=window_size)
+    training_data = prepare.get_word_list(sent, stopwords, window_size=Word2Vec_window_size)
 
     print('Propiedades del corpus: \n')
     print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
 
-    word_to_vec = Word2Vec(vocab_size, embedding_dim)
-    x_train, y_train = word_to_vec.training_data(data)
+    word_to_vec = Word2Vec(vocab_size, embedding_dim, Word2Vec_window_size)
+    x_train, y_train = word_to_vec.training_data(training_data)
     W1, b1 = word_to_vec.train(x_train, y_train)
     vocab_vectors = W1+b1
 

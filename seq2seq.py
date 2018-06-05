@@ -179,7 +179,7 @@ if __name__ == "__main__":
     text = prepare.make_disintegration
     sent = prepare.get_sentences(text)
     dicc = prepare.get_dictionary(text, stopwords, vocab_size)
-    data = prepare.get_word_list(sent, stopwords, window_size=window_size)
+    data = prepare.get_word_list(sent, stopwords, window_size=Word2Vec_window_size)
 
     print('Propiedades del corpus: \n')
     print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
