@@ -1,33 +1,23 @@
 import sys
-import os
-import numpy as np
 from disintegrator import *
-from word2vec import *
+from Word2Vec import *
 from seq2seq import *
-import pprint
-
-
 
 if __name__ == "__main__":
 
-
-
 	# INPUT DATA
 	_input_sentence = sys.argv[-1]
-	prepare = data_preparation()
-	_input_sentence = prepare.make_disintegration(_input_sentence)
+	prepare = DataPreparation()
+	_input_sentence = prepare.make_disintegration
 
-
-	# ENCODE THE SENTENCE
-	word_to_vec = word2vec(vocab_size = 2000, embedding_dim = 10)
+    # ENCODE THE SENTENCE
+	word_to_vec = Word2Vec(vocab_size = vocab_size, embedding_dim = embedding_dim)
 	_input_sentence = word_to_vec.encoder(' '.split(_input_sentence))
 	_input_sentence = np.transpose(np.array(_input_sentence))
-
 
 	# LOAD THE MODEL
 	tf.reset_default_graph()
 	saver = tf.train.import_meta_graph('./model/seq2seq_model.meta')
-
 
 	# PROCESS THE ANSWER
 	with tf.Session() as session:

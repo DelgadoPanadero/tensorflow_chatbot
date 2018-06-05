@@ -1,13 +1,12 @@
-import numpy as np
 import tensorflow as tf
+from parameters import *
 
-
-# GRU layer object
+init_parameters()
 
 
 class GRU(object):
 
-    def __init__(self, input_dimensions, hidden_size, name = '', dtype=tf.float64):
+    def __init__(self, input_dimensions, hidden_size, name='', dtype=tf.float64):
 
         self.input_dimensions = input_dimensions
         self.hidden_size = hidden_size
@@ -69,8 +68,6 @@ class GRU(object):
 
         return tf.squeeze(h_t)
 
-
-
     def process_sequence(self, sequence, h_0=None):
 
         # Put the time-dimension upfront for the scan operator
@@ -90,8 +87,6 @@ class GRU(object):
 
         return self.h_t
 
-
-
     def predict_sequence(self, sequence, h_0):
 
         '''
@@ -102,12 +97,10 @@ class GRU(object):
         init_predict_sentence = tf.zeros([10, 1], dtype=tf.float64, name='whileloop_init_sentence')
         init_prediction = tf.reshape(h_0, shape=[-1, 1], name='whileloop_init_prediction')
 
-
         def loop_cond(prediction, predict_sentence):
             threshold = tf.constant(0.01, dtype=tf.float64, name='whileloop_threshold')
             boolean = tf.greater((tf.reduce_sum(tf.pow(prediction, 2)) ** 0.5), threshold, name='whileloop_boolean')
             return boolean
-
 
         def loop_body(prev_prediction, prev_predict_sentence):
 
@@ -130,7 +123,6 @@ class GRU(object):
 
             return [next_prediction, next_predict_sentence]
 
-
         # While loop that return the predict sentence
         _, predict_sentence = tf.while_loop(cond=loop_cond,
                                             body=loop_body,
@@ -143,11 +135,7 @@ class GRU(object):
 
 # ### Initialize the model
 
-
 # The input has 2 dimensions: dimension 0 is reserved for the first term and dimension 1 is reserved for the second term
-hidden_dim = 10
-embedding_dim = 10
-input_dim = embedding_dim
 
 # Create a placeholder
 input_sentence = tf.placeholder(dtype=tf.float64, shape=[embedding_dim, None], name='input_data')  # emb_dim x n_words
@@ -158,11 +146,9 @@ EOS = tf.zeros(dtype=tf.float64, shape=[embedding_dim, 1], name='EOS')
 input_sentence_ended = tf.concat([input_sentence, EOS], axis=1, name='input_data_ended')
 output_sentence_ended = tf.concat([output_sentence, EOS], axis=1, name='output_data_ended')
 
-
 # Create the GRU layer
-gru_layer_encoder = GRU(input_dim, hidden_dim, name='_encoder')
-gru_layer_decoder = GRU(input_dim, hidden_dim, name='_decoder')
-
+gru_layer_encoder = GRU(embedding_dim, hidden_dim, name='_encoder')
+gru_layer_decoder = GRU(embedding_dim, hidden_dim, name='_decoder')
 
 # Training_process - ONE NN ENCODER - DECODER
 input_encoded = gru_layer_encoder.process_sequence(input_sentence_ended, h_0=None)  # Process the first sentence
@@ -174,27 +160,41 @@ pred_decoded = gru_layer_decoder.predict_sequence(output_sentence_ended, h_0=tho
 train_predicted_output = tf.convert_to_tensor(train_decoded, dtype=tf.float64, name='train_output')
 pred_predicted_output = tf.convert_to_tensor(pred_decoded, dtype=tf.float64, name='pred_output')
 
-
 # Loss
 loss = tf.reduce_sum(0.5 * tf.pow(train_predicted_output - output_sentence_ended, 2))  # / float(batch_size)
 # loss = [sum((real_word-prediction)**2)/embedding_dim for (real_word, prediction) in zip(real_words, predictions)]
-
 
 # Optimizer
 train_step = tf.train.AdamOptimizer().minimize(loss)
 
 if __name__ == "__main__":
 
-    # Prepare data for training the seq2seq
+    from disintegrator import *
+    from Word2Vec import *
 
+    parameters.init()
+
+    # Prepare data for training the seq2seq
+    prepare = DataPreparation()
+    text = prepare.make_disintegration
+    sent = prepare.get_sentences(text)
+    dicc = prepare.get_dictionary(text, stopwords, vocab_size)
+    data = prepare.get_word_list(sent, stopwords, window_size=window_size)
+
+    print('Propiedades del corpus: \n')
+    print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
+
+    word_to_vec = Word2Vec(vocab_size, embedding_dim)
+    x_train, y_train = word_to_vec.training_data(data)
+    W1, b1 = word_to_vec.train(x_train, y_train)
+    vocab_vectors = W1+b1
     conversations = []
 
     for i in range(len(sent) - 2):
-
         if len(sent[i + 1]) != 0 and len(sent[i + 2]) != 0:  # to avoid empty sentences
             conversations.append([sent[i + 1], sent[i + 2]])
 
-        # TRAIN THE MODEL
+    # TRAIN THE MODEL
 
     # Initialize all the variables
     session = tf.Session()
