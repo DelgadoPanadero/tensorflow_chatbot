@@ -26,21 +26,21 @@ if __name__ == "__main__":
     text = prepare.make_disintegration(text)
     sent = prepare.get_sentences(text)
     dicc = prepare.get_dictionary(text, stopwords, vocab_size)
-    data = prepare.get_word_list(sent, stopwords, window_size=window_size)
+    data = prepare.get_word_list(sent, stopwords, window_size=Word2Vec_window_size)
 
     # WORD EMBEDDING ALGORITHM
-    print('- WORD EMBEDDING ALGORITHM \n')
-    word_to_vec = Word2Vec(vocab_size, embedding_dim)
+    print('- TRAIN WORD EMBEDDING ALGORITHM \n')
+    word_to_vec = Word2Vec(vocab_size, Word2Vec_embedding_dim, Word2Vec_optimizer_step)
     x_train, y_train = word_to_vec.training_data(data)
     _ = word_to_vec.train(x_train, y_train, Word2Vec_batch_size)
 
     conversations = []
     for i in range(len(sent) - 2):
-        if (len(sent[i + 1]) != 0 and len(sent[i + 2]) != 0):  # to avoid empty sentences
-            conversations.append([sent[i + 1], sent[i + 2]])
+        if len(sent[i+1]) != 0 and len(sent[i+2]) != 0:  # to avoid empty sentences
+            conversations.append([sent[i+1], sent[i+2]])
 
     # TRAIN THE MODEL
-    print('- TRAIN THE MODEL')
+    print('- TRAIN SEQ2SEQ ALGORITHM')
     printProgressBar(0, len(conversations), prefix='Progress:', suffix='Complete', length=50)
 
     with tf.Session() as session:
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
             losses.append(_loss)
 
-            if (i % (len(conversations) // 100) == 0):
+            if i % (len(conversations) // 100) == 0:
                 print('\n\n', 'Respuesta esperada: ', conv[1])
                 print('Respuesta predicha: ', word_to_vec.decoder(_pred_predicted_output[:, 0:-1].tolist()), '\n')
                 print('Loss: ', _loss)

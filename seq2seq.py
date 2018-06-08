@@ -8,9 +8,16 @@ class GRU(object):
 
     def __init__(self, input_dimensions, hidden_size, name='', dtype=tf.float64):
 
+        # Initialize Init attributes
         self.input_dimensions = input_dimensions
         self.hidden_size = hidden_size
         self.name = name
+
+        # Initialize Method attributes
+        self.x_t = None
+        self.h_0 = None
+        self.h_t = None
+        self.h_t_transposed = None
 
         # Weights for input vectors of shape (input_dimensions, hidden_size)
         self.Wr = tf.Variable(
@@ -45,11 +52,10 @@ class GRU(object):
     def forward_pass(self, h_tm1, x_t):  # Function though to be used by tf.scan
 
         """Perform a forward pass.
-        
-        Arguments
-        ---------
-        h_tm1: np.matrix. The hidden state at the previous timestep (h_{t-1}).
-        x_t: np.matrix. The input vector.
+
+        :param h_tm1: np.matrix. The hidden state at the previous timestep (h_{t-1}).
+        :param x_t: np.matrix. The input vector.
+        :return:
         """
 
         # Convert vector-tensor form into  matrix-tensor form
@@ -87,37 +93,45 @@ class GRU(object):
 
         return self.h_t
 
-    def predict_sequence(self, sequence, h_0):
+    def predict_sequence(self, h_0):
 
-        '''
+        """
         Output sequence. This function iterates self.forward_pass until it gets the EOL.
-        '''
+
+        :param h_0: Initial state
+        :return: predict_sentence
+        """
 
         # Inital values. The are required to be reshaped to rank2-tensor be concated afterwards
         init_predict_sentence = tf.zeros([10, 1], dtype=tf.float64, name='whileloop_init_sentence')
         init_prediction = tf.reshape(h_0, shape=[-1, 1], name='whileloop_init_prediction')
 
-        def loop_cond(prediction, predict_sentence):
+        def loop_cond(prediction, predict_sentence):  # predict_sentence argument is required by tf.while_loop
+
             threshold = tf.constant(0.01, dtype=tf.float64, name='whileloop_threshold')
             boolean = tf.greater((tf.reduce_sum(tf.pow(prediction, 2)) ** 0.5), threshold, name='whileloop_boolean')
             return boolean
 
         def loop_body(prev_prediction, prev_predict_sentence):
 
-            '''
-            This function is a little bit hacky. Tensorflow's loops don't support neither fetching global scope variables
+            """This function is a little bit hacky. Tensorflow's loops don't support neither fetching global scope variables
             that are transformed but not returned from the loop nor modify the rank of the returned tensor in every
-            iteration of the loop. 
-            
+            iteration of the loop.
+
             This seems to be overcome defining the predict_sentence in two stages, one for the previous iter state an
             another one for the next state.
-            '''
+
+            :param prev_prediction:
+            :param prev_predict_sentence:
+            :return: [next_prediction, next_predict_sentence]
+            """
 
             # In the predict_model the previous state and the input state for the forward_pass are the same
             next_prediction = self.forward_pass(prev_prediction, prev_prediction)
             next_prediction = tf.reshape(next_prediction, shape=[-1, 1], name='whileloop_next_prediction')
 
-            # Concat the predicted word to the sentence (instead of list.append() cause tf.while_loop() doesn't support no-tensor arguments)
+            # Concat the predicted word to the sentence (instead of list.append() cause tf.while_loop() doesn't support
+            # no-tensor arguments)
             next_predict_sentence = tf.concat(axis=1, values=[prev_prediction, prev_predict_sentence],
                                               name='whileloop_next_prediction_sentence')
 
@@ -133,28 +147,27 @@ class GRU(object):
         return predict_sentence
 
 
-# ### Initialize the model
-
+# Initialize the model
 # The input has 2 dimensions: dimension 0 is reserved for the first term and dimension 1 is reserved for the second term
 
 # Create a placeholder
-input_sentence = tf.placeholder(dtype=tf.float64, shape=[embedding_dim, None], name='input_data')  # emb_dim x n_words
-output_sentence = tf.placeholder(dtype=tf.float64, shape=[embedding_dim, None], name='output_data')
+input_sentence = tf.placeholder(dtype=tf.float64, shape=[Word2Vec_embedding_dim, None], name='input_data')  # emb_dim x n_words
+output_sentence = tf.placeholder(dtype=tf.float64, shape=[Word2Vec_embedding_dim, None], name='output_data')
 
 # Create End Of Sentence vector
-EOS = tf.zeros(dtype=tf.float64, shape=[embedding_dim, 1], name='EOS')
+EOS = tf.zeros(dtype=tf.float64, shape=[Word2Vec_embedding_dim, 1], name='EOS')
 input_sentence_ended = tf.concat([input_sentence, EOS], axis=1, name='input_data_ended')
 output_sentence_ended = tf.concat([output_sentence, EOS], axis=1, name='output_data_ended')
 
 # Create the GRU layer
-gru_layer_encoder = GRU(embedding_dim, hidden_dim, name='_encoder')
-gru_layer_decoder = GRU(embedding_dim, hidden_dim, name='_decoder')
+gru_layer_encoder = GRU(Word2Vec_embedding_dim, hidden_dim, name='_encoder')
+gru_layer_decoder = GRU(Word2Vec_embedding_dim, hidden_dim, name='_decoder')
 
 # Training_process - ONE NN ENCODER - DECODER
 input_encoded = gru_layer_encoder.process_sequence(input_sentence_ended, h_0=None)  # Process the first sentence
 thought_vector = input_encoded[:, -1]  # Extract the last state vector (thought) from the input response
 train_decoded = gru_layer_decoder.process_sequence(output_sentence_ended, h_0=thought_vector)  # Train_answer
-pred_decoded = gru_layer_decoder.predict_sequence(output_sentence_ended, h_0=thought_vector)
+pred_decoded = gru_layer_decoder.predict_sequence(h_0=thought_vector)
 
 # Output_data
 train_predicted_output = tf.convert_to_tensor(train_decoded, dtype=tf.float64, name='train_output')
@@ -166,6 +179,7 @@ loss = tf.reduce_sum(0.5 * tf.pow(train_predicted_output - output_sentence_ended
 
 # Optimizer
 train_step = tf.train.AdamOptimizer().minimize(loss)
+
 
 if __name__ == "__main__":
 
@@ -182,17 +196,17 @@ if __name__ == "__main__":
     data = prepare.get_word_list(sent, stopwords, window_size=Word2Vec_window_size)
 
     print('Propiedades del corpus: \n')
-    print('\tDiccionario con %d palabras' %(len(dicc['w2i'])))
+    print('\tDiccionario con %d palabras' % (len(dicc['w2i'])))
 
-    word_to_vec = Word2Vec(vocab_size, embedding_dim)
+    word_to_vec = Word2Vec(vocab_size, Word2Vec_embedding_dim, Word2Vec_optimizer_step)
     x_train, y_train = word_to_vec.training_data(data)
     W1, b1 = word_to_vec.train(x_train, y_train)
     vocab_vectors = W1+b1
-    conversations = []
 
-    for i in range(len(sent) - 2):
-        if len(sent[i + 1]) != 0 and len(sent[i + 2]) != 0:  # to avoid empty sentences
-            conversations.append([sent[i + 1], sent[i + 2]])
+    conversations = []
+    for i in range(len(sent)-2):
+        if len(sent[i+1]) != 0 and len(sent[i+2]) != 0:  # to avoid empty sentences
+            conversations.append([sent[i+1], sent[i+2]])
 
     # TRAIN THE MODEL
 
@@ -202,17 +216,18 @@ if __name__ == "__main__":
     session.run(init_variables)
     losses = []
 
-    for conv in conversations:
+    for conversation in conversations:
         # Convert text to vector
-        _input_sentence = word_to_vec.encoder(conv[0])
-        _output_sentence = word_to_vec.encoder(conv[1])
+        _input_sentence = word_to_vec.encoder(conversation[0])
+        _output_sentence = word_to_vec.encoder(conversation[1])
 
         # Convert list-structure to array-structure
         _input_sentence = np.transpose(np.array(_input_sentence))
         _output_sentence = np.transpose(np.array(_output_sentence))
 
         # Run the graph
-        _, _loss = session.run([train_step, loss], feed_dict={input_sentence: _input_sentence, output_sentence: _output_sentence})
+        _, _loss = session.run([train_step, loss],
+                               feed_dict={input_sentence: _input_sentence, output_sentence: _output_sentence})
 
         losses.append(_loss)
 
@@ -231,10 +246,10 @@ if __name__ == "__main__":
     _input_sentence = np.transpose(np.array(_input_sentence))
 
     # Run the graph
-    pred = session.run(pred_predicted_output, feed_dict={input_sentence: _input_sentence})
+    prediction = session.run(pred_predicted_output, feed_dict={input_sentence: _input_sentence})
 
     # Decode
-    pred = np.transpose(np.array(pred))
+    prediction = np.transpose(np.array(prediction))
     _output_sentence = word_to_vec.decoder(pred)
 
     # Sentence

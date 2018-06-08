@@ -1,4 +1,4 @@
-# coding=latin1
+# coding=utf-8
 import re
 import pickle
 import collections
@@ -23,8 +23,8 @@ class DataPreparation(object):
         _text = re.sub(r'<.*?>', ' ', _text)
         _text = re.sub('^\\[a-zA-Z]*', ' ', _text)
 
-        _text = re.sub(r'[,;\n—-“”:\"]', '.', _text)
-        _text = re.sub(r'[?¿!¡]', '.', _text)
+        _text = re.sub(r'[,;\n\?-??:\"]', '.', _text)
+        _text = re.sub(r'[\?�!�]', '.', _text)
         _text = re.sub(r'[)(]', '.', _text)
         _text = re.sub(r' \.', '.', _text)
 
@@ -64,7 +64,7 @@ class DataPreparation(object):
         words = []
         
         for word in _text.split(' '):
-            word = re.sub(r'\.', '', word)  # con esto quitamos el punto de la �ltima palabra en cada frase.
+            word = re.sub(r'\.', '', word)  # con esto quitamos el punto de la �ltima palabra en cada frase.
 
             if (word not in stop_words) and (re.match('^[a-zA-Z]*$', unidecode(word))) and (word != ''):
                 words.append(word)
@@ -73,7 +73,7 @@ class DataPreparation(object):
         # vocabulario un espacio para las palabras desconocidas.
 
         dicc_w2i = dict([(counter[0], index+1) for (index, counter) in enumerate(count)])  # el index+1 es para reservar
-        #  el �ndice 0 para las palabras desconocidas.
+        #  el �ndice 0 para las palabras desconocidas.
 
         dicc_i2w = dict([(index+1, counter[0]) for (index, counter) in enumerate(count)])
         _dicc = {'w2i': dicc_w2i, 'i2w': dicc_i2w}
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     train_text = ''
     for filename in glob.glob(os.path.join('./data/', '*.txt')):
 
-        with open(filename, 'r', encoding = encoding) as file_obj:
+        with open(filename, 'r', encoding=encoding) as file_obj:
             train_text = train_text + '. ' + file_obj.read()
     
     with open('data/stop_words', 'r') as file_obj:
@@ -131,4 +131,3 @@ if __name__ == "__main__":
     dicc = prepare.get_dictionary(train_text, stopwords, vocab_size)
     data = prepare.get_word_list(sent, stopwords, window_size=Word2Vec_window_size)
     print('Created dictionary and data')
-

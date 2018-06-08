@@ -8,10 +8,10 @@ if __name__ == "__main__":
 	# INPUT DATA
 	_input_sentence = sys.argv[-1]
 	prepare = DataPreparation()
-	_input_sentence = prepare.make_disintegration
+	_input_sentence = prepare.make_disintegration()
 
     # ENCODE THE SENTENCE
-	word_to_vec = Word2Vec(vocab_size = vocab_size, embedding_dim = embedding_dim)
+	word_to_vec = Word2Vec(vocab_size, Word2Vec_embedding_dim, Word2Vec_optimizer_step)
 	_input_sentence = word_to_vec.encoder(' '.split(_input_sentence))
 	_input_sentence = np.transpose(np.array(_input_sentence))
 
